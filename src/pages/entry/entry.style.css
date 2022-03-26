@@ -1,0 +1,15 @@
+.entry-page{
+    height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    background-image: url(login-bg.jpg);
+}
+
+.form-holder{
+    height:fit-content;
+    width: fit-content;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 15px;
+}
