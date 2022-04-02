@@ -2,11 +2,17 @@ import {React, useState} from 'react'
 import { Container, Col, Row, Button } from 'react-bootstrap'
 import { TicketTable } from '../../components/ticket-table/TicketTable.comp';
 import TableData from '../../assets/dummy/dummy-tickets.json'
+import { PageBreadcrumb } from '../../components/breadcrumb/Breadcrumb.comp';
 
 export const Dashboard = () => {
     const [ticketCnt,setTicketCnt] = useState(50);
   return (
     <Container>
+        <Row>
+            <Col>
+            <PageBreadcrumb page="Dashboard"/>
+            </Col>
+        </Row>
         <Row>
             <Col className='text-center mt-5 mb-2'>
                 <Button variant='primary' style={{"fontSize":"2rem", "padding":"10px 30px"}}>Add New Ticket</Button>
