@@ -7,7 +7,7 @@ export const Entry = () => {
 
   const [email, setEmail] = useState('')
   const [password,setPassword] = useState('')
-  const [formLoad, setFormLoad] = useState("rest");
+  const [formLoad, setFormLoad] = useState("login");
 
   const handleOnChange = (e)=>{
     const {name, value} = e.target;
@@ -51,7 +51,6 @@ export const Entry = () => {
             :
               <ResetPassword handleOnChange={handleOnChange} email={email} handlePasswordReset={handlePasswordReset} formSwitch={formSwitch}/>
           }
-          
         </div>
     </div>
   )
