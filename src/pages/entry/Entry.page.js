@@ -43,7 +43,7 @@ export const Entry = () => {
   }
  
   return (
-    <div className='entry-page bg-info'>
+    <div className='entry-page'>
         <div className='form-holder'>
           {
             formLoad==="login" ? 
