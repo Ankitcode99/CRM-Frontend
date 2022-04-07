@@ -3,7 +3,19 @@
         "Id":1,
         "Subject":"SSL Issue",
         "Status":"Waiting for client response",
-        "OpenDate":"2022-04-02"
+        "OpenDate":"2022-04-02",
+        "history":[
+            {
+                "date":"07-04-2020",
+                "message":"Test Client Message",
+                "messageBy":"Client"
+            },
+            {
+                "date":"08-04-2020",
+                "message":"Test Admin Message",
+                "messageBy":"Operator"
+            }
+        ]
     },
     {
         "Id":2,

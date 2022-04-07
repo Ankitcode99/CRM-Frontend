@@ -4,6 +4,7 @@ import { Dashboard } from './pages/dashboard/Dashboard.page';
 import { Entry } from './pages/entry/Entry.page';
 import { AddTicket } from './pages/new-ticket/AddTicket.page';
 import { TicketList } from './pages/ticket-list/TicketList.page';
+import { Ticket } from './pages/ticket/Ticket.page';
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         {/* now we can send the main content to be displayed in default layout */}
         {/* <Dashboard/> */}
         {/* <AddTicket /> */}
-        <TicketList />
+        {/* <TicketList /> */}
+        <Ticket />
       </DefaultLayout>
     </div>
   );

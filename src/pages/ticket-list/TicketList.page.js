@@ -12,14 +12,13 @@ export const TicketList = () => {
     useEffect(()=>{},[str,dispTicket])
 
     const handleOnChange = (e) => {
-        setStr(e.target.value);
-        console.log(str)
-        searchTicket(str);
+        const {value} = e.target;
+        setStr(value);
+        searchTicket(value);
    }
 
     const searchTicket = (sttr) => {
-        const displayTicket = tickets.filter(item => item.Subject.toLowerCase().includes(sttr.toLowerCase()))
-        
+        const displayTicket = tickets.filter(item => item.Subject.toLowerCase().includes(sttr.toLowerCase()))     
         setDispTicket(displayTicket);
     }
   return (
