@@ -1,6 +1,7 @@
 import React from 'react'
 import {Table} from 'react-bootstrap'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 
 export const TicketTable = ({TableData}) => {
     
@@ -18,7 +19,7 @@ export const TicketTable = ({TableData}) => {
             {TableData.length ? TableData.map((row,index)=>{
                 return <tr key={row.Id}>
                     <td>{row.Id}</td>
-                    <td>{row.Subject}</td>
+                    <td><Link to={`/ticket/${row.Id}`}>{row.Subject}</Link></td>
                     <td>{row.Status}</td>
                     <td>{row.OpenDate}</td>
                 </tr>
