@@ -1,8 +1,52 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types';
-import {Container, Row, Col, Form, Button} from 'react-bootstrap'
+import {Container, Row, Col, Form, Button, Spinner, Alert } from 'react-bootstrap'
+import {loginFailure, loginPending, loginSuccess} from './loginSlice'
+import {useDispatch, useSelector} from 'react-redux'
+import { userLogin } from '../../api/userApi';
+const {useHistory} = require('react-router-dom')
 
-export const Login = ({handleOnChange, email, pass, handleSubmit, formSwitch}) => {
+export const Login = ({ formSwitch}) => {
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const {isLoading, isAuth, error} = useSelector(state => state.login);
+
+    const [email, setEmail] = useState('')
+    const [password,setPassword] = useState('')
+
+    const handleOnChange = (e)=>{
+        const {name, value} = e.target;
+        switch(name){
+        case 'email':setEmail(value);
+        break;
+        case 'password':setPassword(value);
+        break;
+        default:break;
+        }
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if(!email || !password){
+        return alert("Please fill up all the fields")
+        }
+
+        dispatch(loginPending())
+
+        try {
+            const isAuth = await userLogin({email, password})
+
+            if(isAuth.status === 'error'){
+                return dispatch(loginFailure(isAuth.message))
+            }
+            dispatch(loginSuccess())
+            history.push('/dashboard')
+        } catch (error) {
+            dispatch(loginFailure(error.message))
+        }
+
+    }
 
   return (
     <Container>
@@ -10,6 +54,7 @@ export const Login = ({handleOnChange, email, pass, handleSubmit, formSwitch}) =
             <Col>
                 <h1>Client Login</h1>
                 <hr/>
+                {error && <Alert variant="danger">{error}</Alert>}
                 <Form onSubmit={handleSubmit}>
                     <Form.Group>
                         <Form.Label>Email ID</Form.Label>
@@ -29,13 +74,14 @@ export const Login = ({handleOnChange, email, pass, handleSubmit, formSwitch}) =
                             name="password" 
                             style={{"width":"350px"}}
                             onChange={handleOnChange}
-                            value={pass} 
+                            value={password} 
                             placeholder="Password" 
                             required
                         />
                     </Form.Group>
                     
-                    <Button type="submit" className="mb-3 mt-2">Login</Button>
+                    {!isLoading && <Button type="submit" className="mb-3 mt-2">Login</Button>}
+                    {isLoading && <Spinner animation="border" variant="primary" className='mb-3 mt-2'/>}
                 </Form>
             </Col>
         </Row>
@@ -50,9 +96,5 @@ export const Login = ({handleOnChange, email, pass, handleSubmit, formSwitch}) =
 
 
 Login.propTypes = {
-    handleOnChange: PropTypes.func.isRequired,
-    email: PropTypes.string.isRequired,
-    pass: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
     formSwitch: PropTypes.func.isRequired
 }
