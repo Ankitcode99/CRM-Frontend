@@ -4,6 +4,7 @@ import {Container, Row, Col, Form, Button, Spinner, Alert } from 'react-bootstra
 import {loginFailure, loginPending, loginSuccess} from './loginSlice'
 import {useDispatch, useSelector} from 'react-redux'
 import { userLogin } from '../../api/userApi';
+import { getUserProfile } from '../../pages/dashboard/userAction';
 const {useHistory} = require('react-router-dom')
 
 export const Login = ({ formSwitch}) => {
@@ -41,6 +42,7 @@ export const Login = ({ formSwitch}) => {
                 return dispatch(loginFailure(isAuth.message))
             }
             dispatch(loginSuccess())
+            dispatch(getUserProfile())
             history.push('/dashboard')
         } catch (error) {
             dispatch(loginFailure(error.message))

@@ -3,11 +3,14 @@ import { Navbar, Nav } from 'react-bootstrap'
 import logo from '../../assets/img/logo.png'
 import { LinkContainer } from 'react-router-bootstrap'
 import {useHistory} from 'react-router-dom'
+import { userLogout } from '../../api/userApi'
 
 export const Header = () => {
   const history = useHistory();
 
   const logMeOut = () => {
+    userLogout();
+    sessionStorage.removeItem('accessJWT');
     history.push('/')
   }
   return (
